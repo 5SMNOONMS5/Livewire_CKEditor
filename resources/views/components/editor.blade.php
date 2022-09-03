@@ -5,16 +5,18 @@
     </textarea>
 
     <script>
-        ClassicEditor
-            .create(document.querySelector(`#{{ $attributes['id'] }}`))
-            .then(editor => {
-                editor.model.document.on('change:data', (e) => {
-                @this.set('{{ $attributes['property'] }}', editor.getData());
+        document.addEventListener("livewire:load", () => {
+            ClassicEditor
+                .create(document.querySelector(`#{{ $attributes['id'] }}`))
+                .then(editor => {
+                    editor.model.document.on('change:data', (e) => {
+                    @this.set('{{ $attributes['property'] }}', editor.getData());
+                    })
                 })
-            })
-            .catch(error => {
-                console.error(error);
-            });
+                .catch(error => {
+                    console.error(error);
+                });
+        });
     </script>
 </div>
 
